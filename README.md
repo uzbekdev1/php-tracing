@@ -1,6 +1,4 @@
-##Php tracing
-
-#PHP fully tracking client infos
+Php tracing 
 
 ```
 include('log.php');
