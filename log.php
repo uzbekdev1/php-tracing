@@ -1,4 +1,5 @@
 <?php  
+  
   $logs='-------------'.date('Y-m-d H:i:s').'------------------';    
   $logs.="\r\n";
 
@@ -18,6 +19,25 @@
 
   $logs.='Headers:';
   $logs.="\r\n";
+  
+  // php 5.2
+	if (!function_exists('getallheaders'))
+	{
+		function getallheaders()
+		{
+		   $headers = Array();
+		   foreach ($_SERVER as $name => $value)
+		   {
+			   if (substr($name, 0, 5) == 'HTTP_')
+			   {
+				   $headers[str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))))] = $value;
+			   }
+		   }
+		   return $headers;
+		}
+	}
+
+  // php 5.4
   foreach (getallheaders() as $name => $value) {
     $logs.='  '.$name.':'. $value;
     $logs.="\r\n";
